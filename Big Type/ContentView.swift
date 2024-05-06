@@ -46,7 +46,7 @@ struct ContentView: View {
 
     // Function to compute font size based on text length and available space
     func fontSize(for text: String, in size: CGSize) -> CGFloat {
-        let maximumFontSize: CGFloat = size.height / 3  // Dynamic max size based on view height
+        let maximumFontSize: CGFloat = size.height / 2  // Dynamic max size based on view height
         let baseFontSize: CGFloat = 500  // Large base font size for smaller screens
         let minimumFontSize: CGFloat = 24  // Minimum font size for readability
 
@@ -55,7 +55,7 @@ struct ContentView: View {
             return maximumFontSize
         } else {
             // Scale font size down as text length increases beyond 5 characters
-            let scaleFactor: CGFloat = 2000  // Factor to slow down the rate of shrinkage
+            let scaleFactor: CGFloat = 2800  // Factor to slow down the rate of shrinkage
             return max(minimumFontSize, min(baseFontSize, scaleFactor / CGFloat(text.count - 5)))
         }
     }
