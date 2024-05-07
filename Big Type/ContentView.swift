@@ -9,7 +9,7 @@ struct ContentView: View {
             VStack {
                 HStack{
                     SuperTextField(
-                                placeholder: Text("Enter your Text here").foregroundColor(.gray
+                                placeholder: Text("Type it BIG!").foregroundColor(.gray
                                                                                      ),
                                 text: $text
                             )
@@ -61,7 +61,7 @@ struct ContentView: View {
 
     // Function to compute font size based on text length and available space
     func fontSize(for text: String, in size: CGSize) -> CGFloat {
-        let maximumFontSize: CGFloat = size.height / 3  // Dynamic max size based on view height
+        let maximumFontSize: CGFloat = size.height / 2  // Dynamic max size based on view height
         let baseFontSize: CGFloat = 500  // Large base font size for smaller screens
         let minimumFontSize: CGFloat = 24  // Minimum font size for readability
 
