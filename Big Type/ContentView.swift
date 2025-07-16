@@ -3,14 +3,14 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var text: String = "TYPE!"
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 HStack{
                     SuperTextField(
-                                placeholder: Text("Type it BIG!").foregroundColor(.gray
-                                                                                     ),
+                                placeholder: Text("Type it BIG!").foregroundColor(.secondary),
                                 text: $text
                             )
                     
@@ -20,13 +20,17 @@ struct ContentView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .padding([.horizontal], 4)
                         .cornerRadius(16)
-                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.white))
+                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.primary.opacity(0.1)))
                         .font(.system(size: 24, weight: .regular, design: .default))
-                            .foregroundColor(.black)  // Attempting to set text color
-                            .accentColor(.black)  // Sets the cursor color to blue
-                            .textFieldStyle(DefaultTextFieldStyle())  // Ensures the default styling supports color changes
+                            .foregroundColor(.primary)
+                            .accentColor(.accentColor)
+                            .textFieldStyle(DefaultTextFieldStyle())
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color(NSColor.controlBackgroundColor))
+                            )
 
-                        .shadow(color: .black.opacity(0.5), radius: 0, x: 0, y: 0.33)
+                        .shadow(color: .primary.opacity(0.08), radius: 8, x: 0, y: 2)
                     
                 }
                 .padding(.top, geometry.safeAreaInsets.top + 20)
@@ -40,13 +44,16 @@ struct ContentView: View {
                                         .font(.system(size: fontSize(for: text, in: geometry.size), weight: .bold, design: .monospaced))
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.1)
-                                        .frame(maxWidth: .infinity) // Ensures the text always stays within the bounds
+                                        .frame(maxWidth: .infinity)
                                         .padding(.horizontal, 10)
-                                        .background(Color.blue.opacity(0.2)) // Light blue background for the text display
-                                        .cornerRadius(12)
+                                        .foregroundColor(.primary)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .fill(Color(NSColor.controlBackgroundColor).opacity(0.8))
+                                        )
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 12)
-                                                .stroke(Color.blue, lineWidth: 2) // Consistent style with the text field
+                                                .stroke(Color.accentColor.opacity(0.3), lineWidth: 1)
                                         )
                                 }
                                 .padding(.horizontal, 24)
@@ -54,7 +61,7 @@ struct ContentView: View {
              
                 Spacer()
             }
-            .background(Color.white.edgesIgnoringSafeArea(.all)) // White background for the entire view
+            .background(Color(NSColor.windowBackgroundColor).edgesIgnoringSafeArea(.all))
 
         }
     }
